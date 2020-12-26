@@ -27,19 +27,17 @@ def game():
         print("--------------------------------------")
         print(f"Round-{roun}")
         user = input(">>> Enter (rock/paper/scissor):").lower()
-
-        choice = {"rock": "scissor", "paper": "rock", "scissor": "paper"}
-        comp = random.choice(tuple(choice))
-
+        choe = {"rock": "scissor", "scissor": "paper", "paper": "scissor"}
+        comp = random.choice(tuple(choe))
         print("[+] Computer:", comp)
         if user == "quit":
             break
 
-        elif user not in choice:
+        elif user not in choe:
             print("[-] Enter valid input!")
             continue
 
-        elif user == choice[comp]:
+        elif user == choe[comp]:
             print("[+] You lost!")
             score["Computer"] += 1
 
