@@ -72,10 +72,10 @@ def game(name, rounds):
             draw_lab["text"] = f"Draws: {no_result}"
         elif user == seq[comp]:
             comp_score += 1
-            comp_score_lab["text"] += comp_score
+            comp_score_lab["text"] = comp_score
         else:
             user_score += 1
-            user_score_lab["text"] += user_score
+            user_score_lab["text"] = user_score
 
     global count, user_score, comp_score, no_result
     user_score, comp_score, count, no_result = 0, 0, 0, 0
