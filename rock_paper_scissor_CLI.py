@@ -16,18 +16,17 @@ print(f"[+] Nice to meet you {name}!")
 
 
 def game():
-    try:
-        global rounds
-        rounds = int(input(">>> Number of Rounds:"))
-        print("*******************************************")
-    except ValueError:
-        game()
+    global score
+    rounds = int(input(">>> Number of Rounds:"))
+    print("*******************************************")
 
-    user_score, comp_score, roun, draw = 0, 0, 0, 0
-    while roun != rounds:
+    score = {name: 0, "Computer": 0, "Draw": 0}
+    roun = 1
+
+    while roun != rounds + 1:
         print("--------------------------------------")
-
-        user = input(">>> Enter Here:").lower()
+        print(f"Round-{roun}")
+        user = input(">>> Enter (rock/paper/scissor):").lower()
 
         choice = {"rock": "scissor", "paper": "rock", "scissor": "paper"}
         comp = random.choice(tuple(choice))
@@ -35,27 +34,34 @@ def game():
         print("[+] Computer:", comp)
         if user == "quit":
             break
+
         elif user not in choice:
             print("[-] Enter valid input!")
             continue
+
         elif user == choice[comp]:
             print("[+] You lost!")
-            comp_score += 1
+            score["Computer"] += 1
+
         elif user == comp:
             print("[+] Draw!")
-            draw += 1
+            score["Draw"] += 1
+
         else:
             print("[+] You Won!")
-            user_score += 1
-        print(f"{name.title()}: {user_score}  Computer: {comp_score} Draw: {draw}")
+            score[name] += 1
+
+        print(f"{name.title()}: {score[name]}  Computer: {score['Computer']} Draw: {score['Draw']}")
         roun += 1
 
 
 game()
+
+global score
 print("*******************************************")
-print(f"{max(user_score, comp_score)}")
-ask = input("Do you want to play again?")
-if ask in ("y", "yes"):
-    game()
+if score[name] == score["Computer"]:
+    print("Draw !")
+elif score[name] > score["Computer"]:
+    print(name, "Won!")
 else:
-    exit()
+    print("Computer Won!")
